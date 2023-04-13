@@ -5,10 +5,13 @@ $removeQuantity      = 0.5; //списываем каждый раз
 $unitStorageQuantity = 10; //на складе уп
 $coefficient         = 28; // в упаковке  таблеток
 $totalWriteOff       = 0; //общее кол-во списанных
+$round = 3;
 
 for ($i = 0; $i < (($unitStorageQuantity * $coefficient) * 2); $i++) {
-    $quantity      = round($removeQuantity / $coefficient, 11);
-    $totalWriteOff += $quantity;
+    $totalWriteOff += round($removeQuantity / $coefficient, $round);
+    $delta = round(round($totalWriteOff * $coefficient) / $coefficient, $round);
+
+    $totalWriteOff = $delta;
     echo "$i:   " . $totalWriteOff . " \n";
 }
 

@@ -1,13 +1,15 @@
 <?php
-
-$removeQuantity      = 0.7; //1
+$removeQuantity      = 0.5; //списываем каждый раз
 $unitStorageQuantity = 10; //кол-во флаконов
 $coefficient         = 1; // в флаконе 10мл, в дозе 0,7мл
-$totalWriteOff = 0; //общее кол-во списанных
+$totalWriteOff       = 0; //общее кол-во списанных
+$round = 3;
 
-for ($i = 0; $i < ($unitStorageQuantity * $coefficient); $i++) {
-    $quantity      = round($removeQuantity / $coefficient, 11);
-    $totalWriteOff += $quantity;
+for ($i = 0; $i < ($unitStorageQuantity * $coefficient)*2; $i++) {
+    $totalWriteOff += round($removeQuantity / $coefficient, $round);
+    $delta = round(round($totalWriteOff * $coefficient) / $coefficient, $round);
+
+    $totalWriteOff = $delta;
     echo "$i:   " . $totalWriteOff . " \n";
 }
 
